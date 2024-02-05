@@ -15,7 +15,7 @@ function hash(pathToFile) {
     });
 
     stream.on('error', (error) => {
-        console.error(`Error reading the file: ${error.message}`);
+        console.error(`Operation failed: ${error.message}`);
     });
 }
 

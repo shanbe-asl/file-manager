@@ -13,7 +13,7 @@ function compress(source, destination) {
     });
 
     destinationStream.on('error', (error) => {
-        console.error(`Error during compression: ${error.message}`);
+        console.error(`Operation failed: ${error.message}`);
     });
 }
 
@@ -29,7 +29,7 @@ function decompress(source, destination) {
     });
 
     destinationStream.on('error', (error) => {
-        console.error(`Error during decompression: ${error.message}`);
+        console.error(`Operation failed: ${error.message}`);
     });
 }
 
