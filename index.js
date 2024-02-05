@@ -1,4 +1,5 @@
 import readline from "readline";
+import os from "os";
 import { up, pathToDir, listDir } from "./cli.js";
 import { cat, add, rn, cp, mv, rm } from "./f-ops.js";
 import { EOL, cpus, homedir, sysUsername, architecture } from "./os.js";
@@ -11,6 +12,9 @@ const username =
     ?.split("=")[1] || "User";
 
 console.log(`Welcome to the File Manager, ${username}!`);
+process.chdir(os.homedir());
+console.log(`You are currently in: ${process.cwd()}`);
+
 console.log("Please enter your command or Ctrl+C/type .exit to exit.");
 const rl = readline.createInterface({
   input: process.stdin,
@@ -109,11 +113,27 @@ rl.on("line", (input) => {
 
     case "hash":
       if (args.length > 0) {
-        hashFile(args[0]);
+        hash(args[0]);
       } else {
         console.log("Please specify a file path.");
       }
       break;
+
+      case "compress":
+        if (args.length >= 2) {
+          compressFile(args[0], args[1]);
+        } else {
+          console.log("Please specify the source path and destination path.");
+        }
+        break;
+  
+      case "decompress":
+        if (args.length >= 2) {
+          decompressFile(args[0], args[1]);
+        } else {
+          console.log("Please specify the source path and destination path.");
+        }
+        break;
 
     case ".exit":
       rl.close();
@@ -121,6 +141,7 @@ rl.on("line", (input) => {
     default:
       console.log(`Invalid input: ${command}`);
   }
+  console.log(`You are currently in: ${process.cwd()}`);
 
   rl.prompt();
 }).on("close", () => {
