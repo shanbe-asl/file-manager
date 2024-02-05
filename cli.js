@@ -24,7 +24,7 @@ function pathToDir(newDir) {
 function listDir() {
   fs.readdir(process.cwd(), { withFileTypes: true }, (error, entries) => {
     if (error) {
-      console.error("Failed to list the directory: ${error.message}");
+      console.error(`Failed to list the directory: ${error.message}`);
       return;
     }
     const contents = [];
