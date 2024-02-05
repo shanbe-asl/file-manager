@@ -6,10 +6,8 @@ function up() {
   const currentDir = process.cwd();
   let isRoot;
   if (os.platform() === "win32") {
-    // Windows: Check if the current directory matches 'X:\' format
     isRoot = /^[A-Za-z]:\\$/.test(currentDir);
   } else {
-    // Unix-like: Check if the current directory is '/'
     isRoot = currentDir === "/";
   }
 
