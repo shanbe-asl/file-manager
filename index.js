@@ -1,7 +1,8 @@
 import readline from "readline";
 import { up, pathToDir, listDir } from "./cli.js";
-import { cat, add, rn, cp, mv, rm } from './f-ops.js';
-
+import { cat, add, rn, cp, mv, rm } from "./f-ops.js";
+import { EOL, cpus, homedir, sysUsername, architecture } from "./os.js";
+import { hash } from "./hash.js";
 
 const username =
   process.argv
@@ -79,6 +80,36 @@ rl.on("line", (input) => {
     case "rm":
       if (args.length > 0) {
         rm(args[0]);
+      } else {
+        console.log("Please specify a file path.");
+      }
+      break;
+
+    case "os":
+      switch (args[0]) {
+        case "--EOL":
+          EOL();
+          break;
+        case "--cpus":
+          cpus();
+          break;
+        case "--homedir":
+          homedir();
+          break;
+        case "--username":
+          sysUsername();
+          break;
+        case "--architecture":
+          architecture();
+          break;
+        default:
+          console.log("Invalid os command option");
+      }
+      break;
+
+    case "hash":
+      if (args.length > 0) {
+        hashFile(args[0]);
       } else {
         console.log("Please specify a file path.");
       }
